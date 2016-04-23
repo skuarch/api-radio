@@ -1,0 +1,30 @@
+spring:
+   profiles:
+     active: development
+server:
+    port: 8000
+---
+spring:
+    profiles: development
+    main:
+       show_banner: false
+spring.datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: 
+    username: 
+    password: 
+server:
+    port: 8000
+---
+spring:
+    profiles: production
+    main:
+       show_banner: true
+spring.datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: 
+    initialize: false
+    username: 
+    password: 
+server:
+    port: 8000

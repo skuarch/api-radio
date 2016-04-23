@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="5.3.2" timestamp="2016-03-06T15:21:17.100">
+<file name="/home/skuarch/SpringProjects/api-radio/src/main/java/model/logic/StationChecker.java">
+<violation beginline="84" endline="84" begincolumn="21" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="model.logic" class="StationChecker" method="checkStationSocket" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+</pmd>
