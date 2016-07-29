@@ -1,7 +1,7 @@
 package model.repository.keyword;
 
 import java.util.List;
-import model.bean.Keyword;
+import model.persistence.Keyword;
 import org.springframework.data.repository.CrudRepository;
 
 /**

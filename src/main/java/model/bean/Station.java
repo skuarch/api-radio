@@ -1,136 +1,35 @@
 package model.bean;
 
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * bean.
  *
  * @author skuarch
  */
-@Entity
-@Table(name = "station")
-@NamedQueries({
-    @NamedQuery(name = Station.GET_STATION_BY_NAME, query = "from Station s where s.isSoftDeleted = 0 and s.name = ?1 order by s.position desc"),
-    @NamedQuery(name = Station.GET_ACTIVE_STATION_BY_NAME, query = "from Station s where s.isSoftDeleted = 0 and s.active = 1 order by s.position desc"),
-    @NamedQuery(name = Station.GET_STATIONS, query = "from Station s where s.isSoftDeleted = 0 order by s.position desc"),
-    @NamedQuery(name = Station.GET_ACTIVE_STATIONS, query = "from Station s where s.active = 1 and s.isSoftDeleted = 0"),
-    @NamedQuery(name = Station.GET_STATIONS_BY_ORDER, query = "from Station s where s.isSoftDeleted = 0 order by ?1"),
-    @NamedQuery(name = Station.GET_ACTIVE_STATIONS_BY_ORDER, query = "from Station s where s.isSoftDeleted = 0 and s.active = 1 order by ?1")    
-})
 public class Station implements Serializable {
 
-    private static final long serialVersionUID = 7404172341950854507L;
-    public static final String GET_STATION_BY_NAME = "Station.getStationByName";
-    public static final String GET_ACTIVE_STATION_BY_NAME = "Station.getActiveStationByName";
-    public static final String GET_STATIONS = "Station.getStations";
-    public static final String GET_ACTIVE_STATIONS = "Station.getActiveStations";
-    public static final String GET_STATIONS_BY_ORDER = "Station.getStationsByOrder";
-    public static final String GET_ACTIVE_STATIONS_BY_ORDER = "Station.getActiveStationsByOrder";    
-
-    @Id
-    @Column(name = "station_id", unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private static final long serialVersionUID = 7404172341950854507L;   
     private long id;
-
-    @NotNull
-    @NotEmpty
-    @Column(name = "station_name", unique = true, nullable = false)
     private String name = null;
-
-    @NotNull
-    @NotEmpty
-    @Column(name = "station_url_streaming", unique = true, nullable = false)
     private String urlStreaming = null;
-
-    @Column(name = "station_website")
     private String website = null;
-
-    @NotNull
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Keyword.class)
-    @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "station_keyword",
-            joinColumns = {
-                @JoinColumn(name = "station_id", unique = false, nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                @JoinColumn(name = "keyword_id", unique = false, nullable = false, updatable = false)}
-    )
-    private List<Keyword> keyword = null;
-
-    @NotNull
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Genre.class)
-    @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "station_genre",
-            joinColumns = {
-                @JoinColumn(name = "station_id", unique = false, nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                @JoinColumn(name = "genre_id", unique = false, nullable = false, updatable = false)}
-    )
+    private List<model.persistence.Keyword> keyword = null;
     private List<Genre> genre;
-
-    @NotNull
-    @Column(name = "station_description")
     private String description = null;
-
-    @NotNull
-    @OneToMany(fetch = FetchType.LAZY, targetEntity = Language.class)
-    @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "station_language",
-            joinColumns = {
-                @JoinColumn(name = "station_id", unique = false, nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                @JoinColumn(name = "language_id", unique = false, nullable = false, updatable = false)}
-    )
     private List<Language> language = null;
-
-    @Column(name = "station_frecuencie")
     private String frecuencie = null;
-
-    @Column(name = "station_active")
     private byte active = 1;
-
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "station_country_id", nullable = false)
     private Country country = null;
-
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "station_type_id", nullable = false)
-    private StationType stationType = null;
-
-    @Column(name = "station_clicks")
+    private model.persistence.StationType stationType = null;
     private int clicks = 0;
-
-    @Column(name = "station_modulating")
     private String modulating = null;
-
-    @Column(name = "station_position")
     private int position = 0;
-
-    @Column(name = "station_creation_date")
     private String creationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-
-    @Column(name = "station_is_soft_deleted", nullable = false, columnDefinition = "int(1) default 0")
     private byte isSoftDeleted = 0;
 
     //==========================================================================
@@ -226,7 +125,7 @@ public class Station implements Serializable {
      *
      * @return List
      */
-    public List<Keyword> getKeyword() {
+    public List<model.persistence.Keyword> getKeyword() {
         return keyword;
     }
 
@@ -236,7 +135,7 @@ public class Station implements Serializable {
      *
      * @param keyword List
      */
-    public void setKeyword(List<Keyword> keyword) {
+    public void setKeyword(List<model.persistence.Keyword> keyword) {
         this.keyword = keyword;
     }
 
@@ -366,7 +265,7 @@ public class Station implements Serializable {
      *
      * @return StationType
      */
-    public StationType getStationType() {
+    public model.persistence.StationType getStationType() {
         return stationType;
     }
 
@@ -376,7 +275,7 @@ public class Station implements Serializable {
      *
      * @param stationType StationType
      */
-    public void setStationType(StationType stationType) {
+    public void setStationType(model.persistence.StationType stationType) {
         this.stationType = stationType;
     }
 

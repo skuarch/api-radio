@@ -1,10 +1,11 @@
 package controller.genre;
 
 import controller.application.BaseController;
+import java.util.Collections;
 import java.util.List;
-import model.bean.Genre;
-import model.repository.genre.GenreRepository;
+import model.service.genre.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,29 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetGenreList extends BaseController {
 
     @Autowired
-    private GenreRepository genreRepository;
+    private GenreService genreService;
 
     //==========================================================================
     /**
      * get the list of genres.
      *
+     * @param locale String
      * @return List
      */
-    @RequestMapping(value = { "/v1/genre/get/list" }, method = RequestMethod.GET)
-    public List<Genre> getGenresList() {
+    @RequestMapping(value = { "/v1/genres/{locale}" }, method = RequestMethod.GET)
+    public List<model.bean.Genre> getGenresList(@PathVariable("locale") String locale) {
 
-        List<Genre> genres = null;
+        List<model.bean.Genre> beanGenres;
 
         try {
 
-            genres = genreRepository.getGenres();
+            beanGenres = genreService.getGenre(locale);
 
         } catch (Exception e) {
             handlerExceptionRedirect(e, this.getClass());
+            beanGenres = (List<model.bean.Genre>) Collections.EMPTY_LIST;
         }
 
-        return genres;
-
+        return beanGenres;
     }
 
 }

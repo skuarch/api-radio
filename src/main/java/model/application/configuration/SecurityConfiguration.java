@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * Configuration.
+ *
  * @author skuarch
  */
 @Configuration
@@ -23,9 +24,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    // ==============================================================================
+    // =========================================================================
     /**
      * configureGlobal.
+     *
      * @param amb AuthenticationManagerBuilder
      * @throws Exception if any error occurs
      */
@@ -38,9 +40,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    // ==============================================================================
+    // =========================================================================
     /**
      * configure.
+     *
      * @param http HttpSecurity
      * @throws Exception if any error occurs
      */

@@ -1,6 +1,6 @@
 package model.repository.user;
 
-import model.bean.User;
+import model.persistence.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

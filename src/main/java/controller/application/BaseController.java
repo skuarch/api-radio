@@ -67,6 +67,7 @@ public class BaseController {
     //==========================================================================
     /**
      * this method redirects to error controller.
+     *
      * @param ex Exception
      * @param c Class
      */
@@ -191,6 +192,21 @@ public class BaseController {
 
         } catch (Exception e) {
             LOGGER.error("BaseController.setHeaderNoChache()", e);
+        }
+
+    }
+
+    //==========================================================================
+    protected final void setErrorCode(short code) {
+
+        HttpServletResponse response = getResponse();
+
+        try {
+            if (response != null) {
+                response.sendError(code);
+            }
+        } catch (Exception e) {
+            LOGGER.error("BaseController.setErrorCode()", e);
         }
 
     }

@@ -37,29 +37,29 @@ public class StationChecker {
      * @return boolean
      */
     public boolean checkStationSocket(String host, int port, int stopSeconds, int maxBytes) throws UnknownHostException, IOException {
-        
-        if (host == null || host.length() < 1 ) {
+
+        if (host == null || host.length() < 1) {
             throw new NullPointerException("host is null or empty");
         }
 
         if (port <= 0) {
             throw new NullPointerException("port is invalid");
-        }        
+        }
 
-        int bytes = 0;
+        int bytes;
         int bytesPlus = 0;
         Socket socket = null;
         OutputStream outputStream = null;
         InputStream inputStream = null;
         BufferedInputStream bufferedInputStream = null;
         StringBuilder stringBuilder = new StringBuilder();
-        String request = null;
-        byte[] reqByte = null;
+        String request;
+        byte[] reqByte;
         boolean stationIsActive = false;
         long endTime = System.currentTimeMillis() + stopSeconds;
 
         try {
-            
+
             //open the socket and output
             socket = new Socket(host, port);
             socket.setKeepAlive(false);
@@ -122,22 +122,22 @@ public class StationChecker {
      * @return boolean
      */
     public boolean checkStationUrl(String stringUrl, int stopSeconds, int maxBytes) throws MalformedURLException, IOException {
-        
+
         if (stringUrl == null || stringUrl.length() < 1 || !stringUrl.contains("http")) {
             throw new NullPointerException("stringUrl is null, empty or is invalid");
         }
 
-        URL url = null;
-        URLConnection urlc = null;
+        URL url;
+        URLConnection urlc;
         OutputStream outputStream = null;
         InputStream inputStream = null;
-        int bytes = 0;
+        int bytes;
         int bytesPlus = 0;
         boolean stationIsActive = false;
         long endTime = System.currentTimeMillis() + stopSeconds;
 
-        try {            
-            
+        try {
+
             //set up the connection
             url = new URL(stringUrl);
             urlc = url.openConnection();
@@ -145,7 +145,7 @@ public class StationChecker {
             urlc.setDoOutput(true);
             urlc.setDoInput(true);
             urlc.setConnectTimeout(stopSeconds);
-            urlc.setReadTimeout(stopSeconds);            
+            urlc.setReadTimeout(stopSeconds);
 
             //open the input for save the data
             inputStream = urlc.getInputStream();

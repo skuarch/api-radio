@@ -1,7 +1,7 @@
 package model.component;
 
 import java.util.List;
-import model.bean.Station;
+import model.persistence.Station;
 import model.logic.Constants;
 import model.logic.StationChecker;
 import model.repository.station.StationRepository;
@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 public class CheckStationsSchedulerComponent {
 
     private static final Logger LOGGER = Logger.getLogger(CheckStationsSchedulerComponent.class);
+    private static final byte ACTIVE = 1;
+    private static final byte INACTIVE = 0;
 
     @Autowired
     private StationRepository stationRepository;
@@ -35,8 +37,8 @@ public class CheckStationsSchedulerComponent {
 
             stations.stream().forEach((station) -> {
 
-                try {                    
-                    boolean active = checkStation(station);                    
+                try {
+                    boolean active = checkStation(station);
                     updateStation(station, active);
                 } catch (Exception e) {
                     LOGGER.error("CheckStationsSchedulerComponent.updateStation.forEach", e);
@@ -51,10 +53,10 @@ public class CheckStationsSchedulerComponent {
     }
 
     //==========================================================================
-    private synchronized boolean checkStation(final Station station) throws Exception {
+    private boolean checkStation(final Station station) throws Exception {
 
-        boolean activeUrl = false;
-        boolean activePort = false;
+        boolean activeUrl;
+        boolean activePort;
         String ip;
         int port;
         String streamingUrl;
@@ -100,7 +102,7 @@ public class CheckStationsSchedulerComponent {
                             streamingUrl = streamingUrl + "/";
                         }
                         activeUrl = checkUrl(streamingUrl + "/");
-                        return activeUrl;                        
+                        return activeUrl;
 
                     }
 
@@ -108,23 +110,23 @@ public class CheckStationsSchedulerComponent {
 
             }
 
-        } catch (Exception e) {            
+        } catch (Exception e) {
             return false;
         }
 
     } // end checkStation
 
     //==========================================================================
-    private void updateStation(final Station station, final boolean isActive) {
-
+    private void updateStation(final Station station, final boolean isActive) {        
+        
         new Thread(() -> {
 
             try {
 
                 if (isActive) {
-                    station.setActive((byte) 1);
+                    station.setActive(ACTIVE);
                 } else {
-                    station.setActive((byte) 0);
+                    station.setActive(INACTIVE);
                 }
 
                 stationRepository.save(station);

@@ -2,7 +2,7 @@ package controller.keyword;
 
 import controller.application.BaseController;
 import model.bean.GenericMessage;
-import model.bean.Keyword;
+import model.persistence.Keyword;
 import model.repository.keyword.KeywordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;

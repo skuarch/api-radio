@@ -2,10 +2,8 @@ package controller.station;
 
 import controller.application.BaseController;
 import model.bean.GenericMessage;
-import model.bean.Station;
-import model.logic.Constants;
-import model.repository.station.StationRepository;
-import model.service.station.StationService;
+import model.component.StationComponent;
+import model.persistence.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StationCreate extends BaseController {
 
     @Autowired
-    private StationRepository stationRepository;
-
-    @Autowired
-    private StationService stationService;
+    private StationComponent stationComponent;
 
     //==========================================================================
     /**
@@ -37,23 +32,14 @@ public class StationCreate extends BaseController {
     public GenericMessage createStation(@ModelAttribute Station station) {
 
         GenericMessage genericMessage;
-        long id = 0;
+        long id;
 
         try {
 
-            //station exits? 
-            if (stationService.existStation(station.getName())) {                
-                genericMessage = new GenericMessage(
-                        id,
-                        Constants.UNPROSSABLE_ENTITY,
-                        "station already exist");
-            } else {
-                id = stationRepository.save(station).getId();
-                genericMessage = getSuccessfulMessage(id);
-            }
+            genericMessage = stationComponent.createStationIfDoesntExist(station);
 
         } catch (Exception e) {
-            genericMessage = handleException("StationCreate.createStation", e, StationCreate.class);
+            genericMessage = handleException("StationComponent.createStation", e, StationCreate.class);
         }
 
         return genericMessage;

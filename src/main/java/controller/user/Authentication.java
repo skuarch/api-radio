@@ -2,7 +2,7 @@ package controller.user;
 
 import controller.application.BaseController;
 import model.bean.GenericMessage;
-import model.bean.User;
+import model.persistence.User;
 import model.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;

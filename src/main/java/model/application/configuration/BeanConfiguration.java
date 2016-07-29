@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import interceptor.RequestInterceptor;
 import model.bean.GenericMessage;
-import model.bean.RequestBean;
+import model.persistence.RequestBean;
 
 /**
  * Configuration.

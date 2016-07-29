@@ -1,7 +1,7 @@
 package model.repository.language;
 
 import java.util.List;
-import model.bean.Language;
+import model.persistence.Language;
 import org.springframework.data.repository.CrudRepository;
 
 /**

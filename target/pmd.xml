@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="5.3.2" timestamp="2016-03-06T15:21:17.100">
-<file name="/home/skuarch/SpringProjects/api-radio/src/main/java/model/logic/StationChecker.java">
+<pmd version="5.3.2" timestamp="2016-06-28T14:48:26.661">
+<file name="/home/skuarch/JavaProjects/api-radio/src/main/java/controller/station/StationCreate.java">
+<violation beginline="35" endline="35" begincolumn="14" endcolumn="15" rule="UnusedLocalVariable" ruleset="Unused Code" package="controller.station" class="StationCreate" method="createStation" variable="id" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unusedcode.html#UnusedLocalVariable" priority="3">
+Avoid unused local variables such as 'id'.
+</violation>
+</file>
+<file name="/home/skuarch/JavaProjects/api-radio/src/main/java/model/logic/StationChecker.java">
 <violation beginline="84" endline="84" begincolumn="21" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="model.logic" class="StationChecker" method="checkStationSocket" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
 Useless parentheses.
+</violation>
+</file>
+<file name="/home/skuarch/JavaProjects/api-radio/src/main/java/model/service/station/StationService.java">
+<violation beginline="134" endline="134" begincolumn="31" endcolumn="55" rule="UnnecessaryFullyQualifiedName" ruleset="Import Statements" package="model.service.station" class="StationService" method="createStation" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/imports.html#UnnecessaryFullyQualifiedName" priority="4">
+Unnecessary use of fully qualified name 'model.persistence.Station' due to existing import 'model.persistence.Station'
 </violation>
 </file>
 </pmd>

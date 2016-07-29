@@ -5,7 +5,7 @@
 package model.repository.genre;
 
 import java.util.List;
-import model.bean.Genre;
+import model.persistence.Genre;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -22,14 +22,31 @@ public interface GenreRepository extends CrudRepository<Genre, Long> {
      *
      * @return List
      */
+    List<Genre> getEnglishGenres();
+
+    //==========================================================================
+    /**
+     * return a List with all the genre.
+     *
+     * @return List
+     */
+    List<Genre> getSpanishGenres();
+    
     List<Genre> getGenres();
 
+    //==========================================================================
+    Genre findByNameEnglish(String name);
+
+    //==========================================================================
+    Genre findByNameSpanish(String nameSpanish);
+
+    //==========================================================================
     /**
-     * find genre by name.
+     * find genre by id.
      *
-     * @param name String
+     * @param id long
      * @return Genre
      */
-    Genre findByName(String name);
+    Genre findById(long id);
 
 }

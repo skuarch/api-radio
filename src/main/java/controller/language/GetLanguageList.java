@@ -2,9 +2,9 @@ package controller.language;
 
 import controller.application.BaseController;
 import java.util.List;
-import model.bean.Language;
-import model.repository.language.LanguageRepository;
+import model.service.language.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetLanguageList extends BaseController {
 
     @Autowired
-    private LanguageRepository languageRepository;
+    private LanguageService languageService;
 
     //==========================================================================
     /**
@@ -25,14 +25,14 @@ public class GetLanguageList extends BaseController {
      *
      * @return List
      */
-    @RequestMapping(value = { "/v1/language/get/list" })
-    public List<Language> getLanguageList() {
+    @RequestMapping(value = { "/v1/languages/{locale}" })
+    public List<model.bean.Language> getLanguageList(@PathVariable String locale) {
 
-        List<Language> languages = null;
+        List<model.bean.Language> languages = null;
 
         try {
 
-            languages = languageRepository.getLanguages();
+            languages = languageService.getLanguages(locale);
 
         } catch (Exception e) {
             handlerExceptionRedirect(e, this.getClass());

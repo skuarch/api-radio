@@ -1,34 +1,15 @@
 package model.bean;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  *
  * @author skuarch
  */
-@Entity
-@Table(name = "language")
-@NamedQueries({
-    @NamedQuery(name = Language.GET_LANGUAGES, query = "from Language l order by l.name asc")
-})
 public class Language implements Serializable {
 
     private static final long serialVersionUID = 3405178041950251807L;
-    public static final String GET_LANGUAGES = "Language.getLanguages";
-
-    @Id
-    @Column(name = "language_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "language_name", nullable = false)
     private String name = null;
 
     //==========================================================================
@@ -36,6 +17,11 @@ public class Language implements Serializable {
      * Constructor.
      */
     public Language() {
+    }
+
+    public Language(long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     //==========================================================================

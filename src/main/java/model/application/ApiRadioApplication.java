@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @SpringBootApplication
 @EnableAutoConfiguration
-@EntityScan(value = { "model.bean" })
+@EntityScan(value = { "model.persistence" })
 @ComponentScan({ "controller", "model" })
 @EnableJpaRepositories("model.repository")
 @PropertySource(value = "file:application.properties", ignoreResourceNotFound = false)

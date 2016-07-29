@@ -1,7 +1,7 @@
 package model.repository.request;
 
 import org.springframework.data.repository.CrudRepository;
-import model.bean.RequestBean;
+import model.persistence.RequestBean;
 import org.springframework.stereotype.Repository;
 
 /**

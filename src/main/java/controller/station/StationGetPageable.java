@@ -22,15 +22,15 @@ public class StationGetPageable extends BaseController {
 
     //==========================================================================
     @RequestMapping(value = { "/v1/station/get/pageable" }, method = RequestMethod.GET)
-    public List<Station> getPageableStations(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public List<Station> getPageableStations(@RequestParam("page") int page, @RequestParam("size") int size, @RequestParam String locale) {
 
         List<Station> stations = null;
 
         try {
 
-            stations = stationService.getStationsPageable(page, size);
+            stations = stationService.getStationsPageable(page, size, locale);
 
-        } catch (Exception e) {            
+        } catch (Exception e) {
             handlerExceptionRedirect(e, StationGetPageable.class);
         }
 

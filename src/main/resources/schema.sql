@@ -1,13 +1,13 @@
-DROP DATABASE api_radio;
+DROP DATABASE IF EXISTS api_radio;
 CREATE DATABASE api_radio;
 USE api_radio;
 
 CREATE TABLE user (
-  user_id bigint(20) NOT NULL AUTO_INCREMENT, 
-  user_email varchar(64) NOT NULL, 
-  user_password varchar(35) NOT NULL, 
-  user_is_soft_deleted tinyint(1) DEFAULT '0', 
-  user_is_active tinyint(1) DEFAULT '1', 
+  user_id bigint(20) NOT NULL AUTO_INCREMENT,
+  user_email varchar(64) NOT NULL,
+  user_password varchar(35) NOT NULL,
+  user_is_soft_deleted tinyint(1) DEFAULT '0',
+  user_is_active tinyint(1) DEFAULT '1',
   PRIMARY KEY (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -25,19 +25,22 @@ CREATE TABLE user_role (
   
 CREATE TABLE country (
   country_id bigint(20) NOT NULL AUTO_INCREMENT,
-  country_name varchar(255) NOT NULL,
+  country_name_en varchar(255) NOT NULL,
+  country_name_es varchar(255) NOT NULL,
   PRIMARY KEY (country_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE genre (
   genre_id bigint(20) NOT NULL AUTO_INCREMENT,
-  genre_name varchar(255) NOT NULL,
+  genre_name_en varchar(255) NOT NULL,
+  genre_name_es varchar(255) NOT NULL,
   PRIMARY KEY (genre_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE language (
   language_id bigint(20) NOT NULL AUTO_INCREMENT,
-  language_name varchar(255) NOT NULL,
+  language_name_en varchar(255) NOT NULL,
+  language_name_es varchar(255) NOT NULL,  
   PRIMARY KEY (language_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -49,7 +52,7 @@ CREATE TABLE keyword (
 
 CREATE TABLE station_type (
   station_type_id bigint(20) NOT NULL AUTO_INCREMENT,
-  station_type_name varchar(255) NOT NULL,  
+  station_type_name varchar(255) NOT NULL,
   PRIMARY KEY (station_type_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -104,4 +107,28 @@ CREATE TABLE station_language (
   language_id bigint(20) NOT NULL,
   KEY UK_qxhbkrn7jmqsj3v6uf7cn2bob (language_id),
   CONSTRAINT FK_qxhbkrn7jmqsj3v6uf7cn2bob FOREIGN KEY (language_id) REFERENCES language (language_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE station (
+  station_id bigint(20) NOT NULL AUTO_INCREMENT,
+  station_active tinyint(4) DEFAULT NULL,
+  station_clicks int(11) DEFAULT NULL,
+  station_creation_date varchar(255) DEFAULT NULL,
+  station_description varchar(255) NOT NULL,
+  station_frecuencie varchar(255) DEFAULT NULL,
+  station_is_soft_deleted int(1) NOT NULL DEFAULT '0',
+  station_modulating varchar(255) DEFAULT NULL,
+  station_name varchar(255) NOT NULL,
+  station_position int(11) DEFAULT NULL,
+  station_url_streaming varchar(255) NOT NULL,
+  station_website varchar(255) DEFAULT NULL,
+  station_country_id bigint(20) NOT NULL,
+  station_type_id bigint(20) NOT NULL,
+  PRIMARY KEY (station_id),
+  UNIQUE KEY UK_smxm5nxgwu6akahf8gp7lfmx (station_name),
+  UNIQUE KEY UK_f2nymlru25t3lpbwcxxkhm0y6 (station_url_streaming),
+  KEY FK_9rbrs9n9ps2no77o6y0tn9k8t (station_country_id),
+  KEY FK_foc2bt0pu9xuyajg1s17onxoe (station_type_id),
+  CONSTRAINT FK_9rbrs9n9ps2no77o6y0tn9k8t FOREIGN KEY (station_country_id) REFERENCES country (country_id),
+  CONSTRAINT FK_foc2bt0pu9xuyajg1s17onxoe FOREIGN KEY (station_type_id) REFERENCES station_type (station_type_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

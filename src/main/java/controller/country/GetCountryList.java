@@ -2,9 +2,9 @@ package controller.country;
 
 import controller.application.BaseController;
 import java.util.List;
-import model.bean.Country;
-import model.repository.country.CountryRepository;
+import model.service.country.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,22 +17,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetCountryList extends BaseController {
 
     @Autowired
-    private CountryRepository countryRepository;
+    private CountryService countryService;
 
     //==========================================================================
     /**
      * get list of countries.
      *
+     * @param locale String
      * @return List
      */
-    @RequestMapping(value = { "/v1/country/get/list" })
-    public List<Country> getCountries() {
+    @RequestMapping(value = { "/v1/countries/{locale}" })
+    public List<model.bean.Country> getCountries(@PathVariable String locale) {
 
-        List<Country> countries = null;
+        List<model.bean.Country> countries = null;
 
         try {
 
-            countries = countryRepository.getCountries();
+            countries = countryService.getCountries(locale);
 
         } catch (Exception e) {
             handlerExceptionRedirect(e, this.getClass());

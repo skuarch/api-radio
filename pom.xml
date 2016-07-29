@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>        
-        <version>1.3.2.RELEASE</version>
+        <version>1.3.5.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -70,14 +70,13 @@
         
         <dependency>
             <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20151123</version>
+            <artifactId>json</artifactId>            
         </dependency>
-
 
     </dependencies>
 
     <build>
+    	
         <finalName>api-radio</finalName>
 
         <plugins>
@@ -193,8 +192,9 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <echo>copying application.properties</echo>
+                                <echo>copying files</echo>
                                 <copy file="application.properties" tofile="${basedir}/target/application.properties"/>
+                                <copy file="start.sh" tofile="${basedir}/target/start.sh"/>
                             </tasks>                            
                         </configuration>
                     </execution>

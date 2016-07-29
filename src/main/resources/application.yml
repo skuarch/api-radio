@@ -1,6 +1,3 @@
-spring:
-   profiles:
-     active: development
 server:
     port: 8000
 ---
@@ -8,11 +5,11 @@ spring:
     profiles: development
     main:
        show_banner: false
-spring.datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: 
-    username: 
-    password: 
+    datasource:        
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/api_radio
+        username: root
+        password: dragon3s12        
 server:
     port: 8000
 ---
@@ -20,11 +17,10 @@ spring:
     profiles: production
     main:
        show_banner: true
-spring.datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: 
-    initialize: false
-    username: 
-    password: 
+    datasource:        
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:61254/api_radio        
+        username: root
+        password: Trex12sk        
 server:
     port: 8000
